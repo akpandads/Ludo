@@ -3,18 +3,27 @@ package com.akpanda.ludo.components.board;
 import com.akpanda.ludo.components.enums.Color;
 
 public class SingleBox {
-    private boolean isStarred;
+    private boolean isSafeBox;
     private Color boxColor;
     private boolean hasGatewayToHome;
+    private boolean isStartBox;
     private SingleBox nextNode;
-    private SingleBox gateWayToHome;
+    private SingleHomeBox gateWayToHome;
 
-    public boolean isStarred() {
-        return isStarred;
+    public boolean isStartBox() {
+        return isStartBox;
     }
 
-    public void setStarred(boolean starred) {
-        isStarred = starred;
+    public void setStartBox(boolean startBox) {
+        isStartBox = startBox;
+    }
+
+    public boolean isSafeBox() {
+        return isSafeBox;
+    }
+
+    public void setSafeBox(boolean safeBox) {
+        isSafeBox = safeBox;
     }
 
     public Color getBoxColor() {
@@ -41,11 +50,11 @@ public class SingleBox {
         this.nextNode = nextNode;
     }
 
-    public SingleBox getGateWayToHome() {
+    public SingleHomeBox getGateWayToHome() {
         return gateWayToHome;
     }
 
-    public void setGateWayToHome(SingleBox gateWayToHome) {
+    public void setGateWayToHome(SingleHomeBox gateWayToHome) {
         this.gateWayToHome = gateWayToHome;
     }
 }

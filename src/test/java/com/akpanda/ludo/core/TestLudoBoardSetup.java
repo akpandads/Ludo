@@ -10,19 +10,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TestCoreLudoFunctions {
+public class TestLudoBoardSetup {
 
     @Autowired
-    CoreLudoFunctions coreLudoFunctions;
+    LudoBoardSetup ludoBoardSetup;
 
-    @Test
-    public void testRollDice(){
-        int randomNumber = coreLudoFunctions.rollDice("no name");
-        Assert.assertTrue(randomNumber>=1 && randomNumber<=6);
-    }
 
     @Test
     public void testHomeBoxPath(){
-        coreLudoFunctions.initializeBoard();
+        ludoBoardSetup.initializeBoard();
     }
 }
