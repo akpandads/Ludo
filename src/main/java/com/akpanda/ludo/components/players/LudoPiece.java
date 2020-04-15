@@ -5,6 +5,10 @@ import com.akpanda.ludo.components.enums.Color;
 public class LudoPiece {
     public Color pieceColor;
 
+    public LudoPiece(Color pieceColor) {
+        this.pieceColor = pieceColor;
+    }
+
     public Color getPieceColor() {
         return pieceColor;
     }

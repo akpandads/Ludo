@@ -1,7 +1,12 @@
 package com.akpanda.ludo.core;
 
+import com.akpanda.ludo.components.Game;
 import com.akpanda.ludo.components.board.*;
 import com.akpanda.ludo.components.enums.Color;
+import com.akpanda.ludo.components.players.BluePlayer;
+import com.akpanda.ludo.components.players.GreenPlayer;
+import com.akpanda.ludo.components.players.RedPlayer;
+import com.akpanda.ludo.components.players.YellowPlayer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,20 +18,36 @@ public class LudoBoardSetup {
     Logger logger = LoggerFactory.getLogger(LudoBoardSetup.class);
 
 
-    public void initializeBoard(){
+    public Game initializeBoard(String redName,String blueName, String greenName, String yellowName){
+
+        Game game = new Game();
+
         HomeBoxLinkedList blueHomePath = initializeHomePath(Color.BLUE);
         HomeBoxLinkedList redHomePath = initializeHomePath(Color.RED);
         HomeBoxLinkedList greenHomePath = initializeHomePath(Color.GREEN);
         HomeBoxLinkedList yellowHomePath = initializeHomePath(Color.YELLOW);
+
         LudoBoardPart greenPart = initializeCommonPath(Color.GREEN, redHomePath);
         LudoBoardPart yellowPart = initializeCommonPath(Color.YELLOW, blueHomePath);
         LudoBoardPart redPart = initializeCommonPath(Color.RED, yellowHomePath) ;
         LudoBoardPart bluePart = initializeCommonPath(Color.BLUE, greenHomePath);
+
         joinParts(redPart,greenPart);
         joinParts(greenPart,yellowPart);
         joinParts(yellowPart,bluePart);
         joinParts(bluePart,redPart);
 
+        BluePlayer bluePlayer = new BluePlayer(Color.BLUE,blueName, bluePart);
+        GreenPlayer greenPlayer = new GreenPlayer(Color.GREEN,greenName, greenPart);
+        RedPlayer redPlayer = new RedPlayer(Color.RED,redName, redPart);
+        YellowPlayer yellowPlayer = new YellowPlayer(Color.YELLOW,yellowName, yellowPart);
+
+        game.setBluePlayer(bluePlayer);
+        game.setGreenPlayer(greenPlayer);
+        game.setRedPlayer(redPlayer);
+        game.setYellowPlayer(yellowPlayer);
+
+        return game;
     }
 
     private void joinParts(LudoBoardPart firstQuadrant, LudoBoardPart secondQuadrant) {

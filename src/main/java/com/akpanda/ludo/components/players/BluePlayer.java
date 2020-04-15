@@ -2,10 +2,16 @@ package com.akpanda.ludo.components.players;
 
 import com.akpanda.ludo.components.board.LudoBoardPart;
 import com.akpanda.ludo.components.board.SingleBox;
+import com.akpanda.ludo.components.enums.Color;
 import org.springframework.stereotype.Component;
 
 public class BluePlayer extends Player{
     private LudoBoardPart bluePart;
+
+    public BluePlayer(Color color, String playerName, LudoBoardPart bluePart) {
+        super(color, playerName);
+        this.bluePart = bluePart;
+    }
 
     public LudoBoardPart getBluePart() {
         return bluePart;
