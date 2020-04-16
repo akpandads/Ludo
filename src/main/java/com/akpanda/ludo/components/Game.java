@@ -1,6 +1,7 @@
 package com.akpanda.ludo.components;
 
 import com.akpanda.ludo.components.players.*;
+import com.akpanda.ludo.core.LudoCoreFunctionalities;
 
 public class Game {
     private BluePlayer bluePlayer;
@@ -8,7 +9,15 @@ public class Game {
     private GreenPlayer greenPlayer;
     private YellowPlayer yellowPlayer;
     private Player currentPlayer;
+    private LudoCoreFunctionalities ludoCoreFunctionalities;
 
+    public LudoCoreFunctionalities getLudoCoreFunctionalities() {
+        return ludoCoreFunctionalities;
+    }
+
+    public void setLudoCoreFunctionalities(LudoCoreFunctionalities ludoCoreFunctionalities) {
+        this.ludoCoreFunctionalities = ludoCoreFunctionalities;
+    }
 
     public BluePlayer getBluePlayer() {
         return bluePlayer;

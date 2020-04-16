@@ -1,14 +1,11 @@
 package com.akpanda.ludo.components.board;
 
-import com.akpanda.ludo.components.enums.Color;
-
-public class SingleBox {
+public class CommonPathBox extends Box{
     private boolean isSafeBox;
-    private Color boxColor;
     private boolean hasGatewayToHome;
     private boolean isStartBox;
-    private SingleBox nextNode;
-    private SingleHomeBox gateWayToHome;
+    private CommonPathBox nextNode;
+    private HomePathBox gateWayToHome;
 
     public boolean isStartBox() {
         return isStartBox;
@@ -26,14 +23,6 @@ public class SingleBox {
         isSafeBox = safeBox;
     }
 
-    public Color getBoxColor() {
-        return boxColor;
-    }
-
-    public void setBoxColor(Color boxColor) {
-        this.boxColor = boxColor;
-    }
-
     public boolean isHasGatewayToHome() {
         return hasGatewayToHome;
     }
@@ -42,19 +31,19 @@ public class SingleBox {
         this.hasGatewayToHome = hasGatewayToHome;
     }
 
-    public SingleBox getNextNode() {
+    public CommonPathBox getNextNode() {
         return nextNode;
     }
 
-    public void setNextNode(SingleBox nextNode) {
+    public void setNextNode(CommonPathBox nextNode) {
         this.nextNode = nextNode;
     }
 
-    public SingleHomeBox getGateWayToHome() {
+    public HomePathBox getGateWayToHome() {
         return gateWayToHome;
     }
 
-    public void setGateWayToHome(SingleHomeBox gateWayToHome) {
+    public void setGateWayToHome(HomePathBox gateWayToHome) {
         this.gateWayToHome = gateWayToHome;
     }
 }

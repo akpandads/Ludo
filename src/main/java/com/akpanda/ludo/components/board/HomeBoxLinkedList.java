@@ -1,13 +1,13 @@
 package com.akpanda.ludo.components.board;
 
 public class HomeBoxLinkedList {
-    public SingleHomeBox start;
+    public HomePathBox start;
 
-    public SingleHomeBox getStart() {
+    public HomePathBox getStart() {
         return start;
     }
 
-    public void setStart(SingleHomeBox start) {
+    public void setStart(HomePathBox start) {
         this.start = start;
     }
 }

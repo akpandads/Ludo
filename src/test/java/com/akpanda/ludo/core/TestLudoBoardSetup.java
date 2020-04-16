@@ -2,9 +2,8 @@ package com.akpanda.ludo.core;
 
 
 import com.akpanda.ludo.components.Game;
-import com.akpanda.ludo.components.board.LudoBoardPart;
-import com.akpanda.ludo.components.board.SingleBox;
-import com.akpanda.ludo.components.board.SingleHomeBox;
+import com.akpanda.ludo.components.board.CommonPathBox;
+import com.akpanda.ludo.components.board.HomePathBox;
 import com.akpanda.ludo.components.enums.Color;
 import com.akpanda.ludo.components.players.BluePlayer;
 import com.akpanda.ludo.components.players.GreenPlayer;
@@ -32,16 +31,16 @@ public class TestLudoBoardSetup {
         YellowPlayer yellowPlayer = game.getYellowPlayer();
         BluePlayer bluePlayer = game.getBluePlayer();
 
-        SingleBox redStartPoint = redPlayer.getRedPart().getStartPoint();
-        SingleBox redHead = redPlayer.getRedPart().getStartPoint();
+        CommonPathBox redStartPoint = redPlayer.getRedPart().getStartPoint();
+        CommonPathBox redHead = redPlayer.getRedPart().getStartPoint();
         int redCount=1;
         while(redHead.getNextNode() != redStartPoint){
             redCount++;
             redHead = redHead.getNextNode();
         }
 
-        SingleBox blueStartPoint = bluePlayer.getBluePart().getStartPoint();
-        SingleBox blueHead = bluePlayer.getBluePart().getStartPoint();
+        CommonPathBox blueStartPoint = bluePlayer.getBluePart().getStartPoint();
+        CommonPathBox blueHead = bluePlayer.getBluePart().getStartPoint();
         int blueCount=1;
         while(blueHead.getNextNode() != blueStartPoint){
             blueCount++;
@@ -49,8 +48,8 @@ public class TestLudoBoardSetup {
         }
         Assert.assertEquals(blueCount,52);
 
-        SingleBox greenStartPoint = greenPlayer.getGreenPart().getStartPoint();
-        SingleBox greenHead = greenPlayer.getGreenPart().getStartPoint();
+        CommonPathBox greenStartPoint = greenPlayer.getGreenPart().getStartPoint();
+        CommonPathBox greenHead = greenPlayer.getGreenPart().getStartPoint();
         int greenCount=1;
         while(greenHead.getNextNode() != greenStartPoint){
             greenCount++;
@@ -58,8 +57,8 @@ public class TestLudoBoardSetup {
         }
         Assert.assertEquals(greenCount,52);
 
-        SingleBox yellowStartPoint = yellowPlayer.getYellowPart().getStartPoint();
-        SingleBox yellowHead = yellowPlayer.getYellowPart().getStartPoint();
+        CommonPathBox yellowStartPoint = yellowPlayer.getYellowPart().getStartPoint();
+        CommonPathBox yellowHead = yellowPlayer.getYellowPart().getStartPoint();
         int yellowCount=1;
         while(yellowHead.getNextNode() != yellowStartPoint){
             yellowCount++;
@@ -76,7 +75,7 @@ public class TestLudoBoardSetup {
         YellowPlayer yellowPlayer = game.getYellowPlayer();
         BluePlayer bluePlayer = game.getBluePlayer();
 
-        SingleBox redHead = redPlayer.getRedPart().getStartPoint();
+        CommonPathBox redHead = redPlayer.getRedPart().getStartPoint();
         int redCount=1;
         int greenHomePathCOunt=1;
         while(!redHead.getNextNode().getNextNode().isStartBox()){
@@ -86,9 +85,9 @@ public class TestLudoBoardSetup {
         Assert.assertEquals(redHead.isHasGatewayToHome(),true);
         Assert.assertNotNull(redHead.getGateWayToHome());
         Assert.assertEquals(12,redCount);
-        Assert.assertTrue(redHead.getNextNode().getNextNode().getBoxColor().equals(Color.GREEN));
+        Assert.assertTrue(redHead.getNextNode().getNextNode().getColor().equals(Color.GREEN));
 
-        SingleHomeBox greenHomeHead = redHead.getGateWayToHome();
+        HomePathBox greenHomeHead = redHead.getGateWayToHome();
         while(greenHomeHead.getNext()!=null){
             greenHomeHead = greenHomeHead.getNext();
             greenHomePathCOunt++;
@@ -98,7 +97,7 @@ public class TestLudoBoardSetup {
         Assert.assertTrue(greenHomeHead.isFinalBox());
 
         
-        SingleBox greenHead = greenPlayer.getGreenPart().getStartPoint();
+        CommonPathBox greenHead = greenPlayer.getGreenPart().getStartPoint();
         int greenCount=1;
         int yellowHomePathCOunt=1;
         while(!greenHead.getNextNode().getNextNode().isStartBox()){
@@ -108,8 +107,8 @@ public class TestLudoBoardSetup {
         Assert.assertEquals(greenHead.isHasGatewayToHome(),true);
         Assert.assertNotNull(greenHead.getGateWayToHome());
         Assert.assertEquals(12,greenCount);
-        Assert.assertTrue(greenHead.getNextNode().getNextNode().getBoxColor().equals(Color.YELLOW));
-        SingleHomeBox yellowHomeHead = redHead.getGateWayToHome();
+        Assert.assertTrue(greenHead.getNextNode().getNextNode().getColor().equals(Color.YELLOW));
+        HomePathBox yellowHomeHead = redHead.getGateWayToHome();
         while(yellowHomeHead.getNext()!=null){
             yellowHomeHead = yellowHomeHead.getNext();
             yellowHomePathCOunt++;
@@ -119,7 +118,7 @@ public class TestLudoBoardSetup {
         Assert.assertTrue(yellowHomeHead.isFinalBox());
 
         
-        SingleBox yellowHead = yellowPlayer.getYellowPart().getStartPoint();
+        CommonPathBox yellowHead = yellowPlayer.getYellowPart().getStartPoint();
         int yellowCount=1;
         int blueHomePathCOunt=1;
         while(!yellowHead.getNextNode().getNextNode().isStartBox()){
@@ -129,8 +128,8 @@ public class TestLudoBoardSetup {
         Assert.assertEquals(yellowHead.isHasGatewayToHome(),true);
         Assert.assertNotNull(yellowHead.getGateWayToHome());
         Assert.assertEquals(12,yellowCount);
-        Assert.assertTrue(yellowHead.getNextNode().getNextNode().getBoxColor().equals(Color.BLUE));
-        SingleHomeBox blueHomeHead = redHead.getGateWayToHome();
+        Assert.assertTrue(yellowHead.getNextNode().getNextNode().getColor().equals(Color.BLUE));
+        HomePathBox blueHomeHead = redHead.getGateWayToHome();
         while(blueHomeHead.getNext()!=null){
             blueHomeHead = blueHomeHead.getNext();
             blueHomePathCOunt++;
@@ -140,7 +139,7 @@ public class TestLudoBoardSetup {
         Assert.assertTrue(blueHomeHead.isFinalBox());
 
         
-        SingleBox blueHead = bluePlayer.getBluePart().getStartPoint();
+        CommonPathBox blueHead = bluePlayer.getBluePart().getStartPoint();
         int blueCount=1;
         int redHomePathCOunt=1;
         while(!blueHead.getNextNode().getNextNode().isStartBox()){
@@ -150,8 +149,8 @@ public class TestLudoBoardSetup {
         Assert.assertEquals(blueHead.isHasGatewayToHome(),true);
         Assert.assertNotNull(blueHead.getGateWayToHome());
         Assert.assertEquals(12,blueCount);
-        Assert.assertTrue(blueHead.getNextNode().getNextNode().getBoxColor().equals(Color.RED));
-        SingleHomeBox redHomeHead = redHead.getGateWayToHome();
+        Assert.assertTrue(blueHead.getNextNode().getNextNode().getColor().equals(Color.RED));
+        HomePathBox redHomeHead = redHead.getGateWayToHome();
         while(redHomeHead.getNext()!=null){
             redHomeHead = redHomeHead.getNext();
             redHomePathCOunt++;

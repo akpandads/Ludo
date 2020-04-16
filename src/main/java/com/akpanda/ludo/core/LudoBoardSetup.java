@@ -9,7 +9,6 @@ import com.akpanda.ludo.components.players.RedPlayer;
 import com.akpanda.ludo.components.players.YellowPlayer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -21,6 +20,7 @@ public class LudoBoardSetup {
     public Game initializeBoard(String redName,String blueName, String greenName, String yellowName){
 
         Game game = new Game();
+        LudoCoreFunctionalities ludoCoreFunctionalities = new LudoCoreFunctionalities();
 
         HomeBoxLinkedList blueHomePath = initializeHomePath(Color.BLUE);
         HomeBoxLinkedList redHomePath = initializeHomePath(Color.RED);
@@ -46,12 +46,13 @@ public class LudoBoardSetup {
         game.setGreenPlayer(greenPlayer);
         game.setRedPlayer(redPlayer);
         game.setYellowPlayer(yellowPlayer);
+        game.setLudoCoreFunctionalities(ludoCoreFunctionalities);
 
         return game;
     }
 
     private void joinParts(LudoBoardPart firstQuadrant, LudoBoardPart secondQuadrant) {
-        SingleBox pointer = firstQuadrant.getStartPoint();
+        CommonPathBox pointer = firstQuadrant.getStartPoint();
         while(pointer.getNextNode() !=null){
             pointer = pointer.getNextNode();
         }
@@ -60,17 +61,17 @@ public class LudoBoardSetup {
 
     private LudoBoardPart initializeCommonPath(Color color, HomeBoxLinkedList nextColorHomePath) {
         LudoBoardPart ludoBoardPart = new LudoBoardPart();
-        SingleBox singleBox = new SingleBox();
-        singleBox.setBoxColor(color);
-        singleBox.setStartBox(true);
-        singleBox.setGateWayToHome(null);
-        singleBox.setHasGatewayToHome(false);
-        singleBox.setSafeBox(true);
-        singleBox.setNextNode(null);
-        SingleBox pointer = singleBox;
+        CommonPathBox commonPathBox = new CommonPathBox();
+        commonPathBox.setColor(color);
+        commonPathBox.setStartBox(true);
+        commonPathBox.setGateWayToHome(null);
+        commonPathBox.setHasGatewayToHome(false);
+        commonPathBox.setSafeBox(true);
+        commonPathBox.setNextNode(null);
+        CommonPathBox pointer = commonPathBox;
         for(int i=2;i<=13;i++){
-            SingleBox tempBox = new SingleBox();
-            tempBox.setBoxColor(Color.WHITE);
+            CommonPathBox tempBox = new CommonPathBox();
+            tempBox.setColor(Color.WHITE);
             tempBox.setStartBox(false);
             if(i==9){
                 tempBox.setGateWayToHome(null);
@@ -101,24 +102,22 @@ public class LudoBoardSetup {
                 pointer = tempBox;
             }
         }
-        ludoBoardPart.setStartPoint(singleBox);
+        ludoBoardPart.setStartPoint(commonPathBox);
         return ludoBoardPart;
     }
 
     private HomeBoxLinkedList initializeHomePath(Color color) {
         HomeBoxLinkedList homeBoxLinkedList = new HomeBoxLinkedList();
-        SingleHomeBox singleHomeBox = new SingleHomeBox();
-        singleHomeBox.setNext(null);
-        singleHomeBox.setFinalBox(false);
-        singleHomeBox.setColor(color);
-        singleHomeBox.setPosition(1);
-        SingleHomeBox pointer = singleHomeBox;
+        HomePathBox homePathBox = new HomePathBox();
+        homePathBox.setNext(null);
+        homePathBox.setFinalBox(false);
+        homePathBox.setColor(color);
+        HomePathBox pointer = homePathBox;
         for(int i=2 ;i<=LudoConstants.HOME_PATH_LENGTH;i++){
-            SingleHomeBox tempBox = new SingleHomeBox();
+            HomePathBox tempBox = new HomePathBox();
             tempBox.setColor(color);
             tempBox.setFinalBox(false);
             tempBox.setNext(null);
-            tempBox.setPosition(i);
             pointer.setNext(tempBox);
             pointer = tempBox;
             if(i==6){
@@ -126,7 +125,7 @@ public class LudoBoardSetup {
                 tempBox.setNext(null);
             }
         }
-        homeBoxLinkedList.setStart(singleHomeBox);
+        homeBoxLinkedList.setStart(homePathBox);
         return homeBoxLinkedList;
     }
 }
