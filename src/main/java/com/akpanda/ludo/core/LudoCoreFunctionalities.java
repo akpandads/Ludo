@@ -90,10 +90,38 @@ public class LudoCoreFunctionalities {
                 }
                 else{
                     CommonPathBox temp = (CommonPathBox) currentPiece.getValue();
-                    if(temp.isHasGatewayToHome()){
+                    if(temp.isHasGatewayToHome() && temp.getColor()==selectedPiece.getPieceColor()){
+                        HomePathBox homeTemp = temp.getGateWayToHome();
                         for(int i=1;i<diceRoll;i++){
-
+                            homeTemp = homeTemp.getNext();
                         }
+                        currentPiece.setValue(homeTemp);
+                        if(homeTemp.getNext() == null){
+                            currentPlayer.setFinishedPieces(currentPlayer.getFinishedPieces()+1);
+                        }
+                    }
+                    else{
+                        int i=1;
+                        boolean enteredHome = false;
+                        HomePathBox headerHomeBox = null;
+                        while (i<=diceRoll){
+                            i++;
+                            temp = temp.getNextNode();
+                            if(temp.isHasGatewayToHome() && temp.getGateWayToHome().getColor() == selectedPiece.getPieceColor())
+                                break;
+                        }
+                        if(i<diceRoll){
+                            enteredHome = true;
+                            headerHomeBox = temp.getGateWayToHome();
+                            while(i<=diceRoll){
+                               i++;
+                               headerHomeBox = headerHomeBox.getNext();
+                            }
+                        }
+                        if(enteredHome)
+                            currentPiece.setValue(headerHomeBox);
+                        else
+                            currentPiece.setValue(temp);
                     }
                 }
             }
