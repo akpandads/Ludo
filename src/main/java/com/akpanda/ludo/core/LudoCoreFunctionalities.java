@@ -4,10 +4,11 @@ import com.akpanda.ludo.components.Game;
 import com.akpanda.ludo.components.board.Box;
 import com.akpanda.ludo.components.board.CommonPathBox;
 import com.akpanda.ludo.components.board.HomePathBox;
-import com.akpanda.ludo.components.players.LudoPiece;
-import com.akpanda.ludo.components.players.Player;
+import com.akpanda.ludo.components.board.LudoBoardPart;
+import com.akpanda.ludo.components.players.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +16,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+
+@Component
 public class LudoCoreFunctionalities {
     Logger logger = LoggerFactory.getLogger(LudoCoreFunctionalities.class);
 
@@ -88,6 +91,16 @@ public class LudoCoreFunctionalities {
                         }
                     }
                 }
+                else if(currentPiece.getValue()==null){
+                    if(currentPlayer instanceof BluePlayer)
+                        currentPiece.setValue(((BluePlayer) currentPlayer).getBluePart().getStartPoint());
+                    if(currentPlayer instanceof RedPlayer)
+                        currentPiece.setValue(((RedPlayer) currentPlayer).getRedPart().getStartPoint());
+                    if(currentPlayer instanceof GreenPlayer)
+                        currentPiece.setValue(((GreenPlayer) currentPlayer).getGreenPart().getStartPoint());
+                    if(currentPlayer instanceof YellowPlayer)
+                        currentPiece.setValue(((YellowPlayer) currentPlayer).getYellowPart().getStartPoint());
+                }
                 else{
                     CommonPathBox temp = (CommonPathBox) currentPiece.getValue();
                     if(temp.isHasGatewayToHome() && temp.getColor()==selectedPiece.getPieceColor()){
@@ -127,5 +140,7 @@ public class LudoCoreFunctionalities {
             }
         });
     }
+
+
 
 }

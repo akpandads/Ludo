@@ -4,6 +4,8 @@ import com.akpanda.ludo.components.players.*;
 import com.akpanda.ludo.core.LudoCoreFunctionalities;
 
 public class Game {
+
+    private String gameId;
     private BluePlayer bluePlayer;
     private RedPlayer redPlayer;
     private GreenPlayer greenPlayer;
@@ -57,5 +59,9 @@ public class Game {
 
     public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
+    }
+
+    public String getGameId() {
+        return gameId;
     }
 }
